@@ -37,8 +37,7 @@ def get_chord_notes(root, chord_type):
 def render_fretboard_html(fretboard, chord_notes):
     html = """
     <style>
-        .fretboard { display: grid; grid-template-columns: repeat(23, 40px); gap: 1px; }
-        .string-row { display: contents; }
+        .fretboard { display: grid; grid-template-columns: 40px repeat(23, 40px); gap: 1px; }
         .fret {
             height: 30px;
             display: flex;
@@ -48,13 +47,31 @@ def render_fretboard_html(fretboard, chord_notes):
             font-family: monospace;
             font-size: 14px;
         }
+        .fret-label {
+            background: #333;
+            color: white;
+            font-weight: bold;
+        }
         .note-normal { background: #eee; color: #666; }
         .note-highlight { background: orange; color: white; font-weight: bold; }
         .note-root { background: crimson; color: white; font-weight: bold; }
+        .fretboard-container {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
     </style>
+    <div class="fretboard-container">
     <div class="fretboard">
+        <div class="fret fret-label"></div> <!-- 左上の空白セル -->
     """
+
+    # フレット番号（0〜22）
+    for fret_num in range(23):
+        html += f"<div class='fret fret-label'>{fret_num}</div>"
+    
+    # 各弦のノート
     for string in fretboard:
+        html += f"<div class='fret fret-label'></div>"  # 弦ラベル用の空白セル
         for fret, note in enumerate(string):
             if note == chord_notes[0]:
                 cell_class = "note-root"
@@ -63,7 +80,7 @@ def render_fretboard_html(fretboard, chord_notes):
             else:
                 cell_class = "note-normal"
             html += f"<div class='fret {cell_class}'>{note}</div>"
-    html += "</div>"
+    html += "</div></div>"
     return html
 
 # ---------------- Streamlit UI ---------------- #
