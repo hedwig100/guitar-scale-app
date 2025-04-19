@@ -12,7 +12,7 @@ CHORD_FORMULAS = {
     "maj7": [0, 4, 7, 11],
 }
 
-OPEN_STRINGS = ['E', 'A', 'D', 'G', 'B', 'E']  # 6弦→1弦
+OPEN_STRINGS = ['E', 'B', 'G', 'D', 'A', 'E']  # 1弦→6弦
 
 def generate_fretboard():
     fretboard = []
