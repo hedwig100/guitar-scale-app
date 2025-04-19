@@ -1,5 +1,8 @@
-# Python Template
+# Guitar Scale App
+
+すべてGPTに書かせた、まだちょいバグっている。
 
 ```
-cp python-template <where-you-want-to-use-python>
+poetry install
+poetry run streamlit run app.py
 ```
